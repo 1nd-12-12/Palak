@@ -1,0 +1,540 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>For Palak ✨ | Bestie Edition</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          },
+          colors: {
+            midnight: '#07081a',
+            deepPurple: '#160d36',
+            royalPurple: '#2d114d',
+            neonPink: '#ec4899',
+            softViolet: '#a855f7',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-midnight: #07081a;
+      --bg-purple: #160d36;
+      --bg-plum: #2d114d;
+      --accent-pink: #ec4899;
+      --accent-violet: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 15%, #2d114d 0%, #160d36 45%, #07081a 100%);
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      user-select: none;
+    }
+
+    /* Ambient Glowing Orbs */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(85px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.45;
+      animation: orbFloat 14s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 320px;
+      height: 320px;
+      background: #ec4899;
+      top: -80px;
+      right: -60px;
+    }
+
+    .orb-2 {
+      width: 360px;
+      height: 360px;
+      background: #7e22ce;
+      bottom: -100px;
+      left: -80px;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 240px;
+      height: 240px;
+      background: #3b82f6;
+      top: 45%;
+      left: 55%;
+      opacity: 0.22;
+      animation-delay: -9s;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-25px, 30px) scale(1.12); }
+    }
+
+    /* Fullscreen Particle Canvas */
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.085) 0%, rgba(255, 255, 255, 0.03) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 20px 50px rgba(4, 4, 18, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    /* Glowing Typography */
+    .glow-title {
+      background: linear-gradient(135deg, #ffffff 15%, #f9a8d4 55%, #d8b4fe 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.48));
+    }
+
+    .glow-pink {
+      text-shadow: 0 0 22px rgba(236, 72, 153, 0.7), 0 0 42px rgba(168, 85, 247, 0.45);
+    }
+
+    .glow-soft {
+      text-shadow: 0 2px 14px rgba(168, 85, 247, 0.45);
+    }
+
+    /* Primary Interactive Button */
+    .btn-primary {
+      background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+      box-shadow: 0 10px 28px -4px rgba(236, 72, 153, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, filter 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 34px -2px rgba(236, 72, 153, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      filter: brightness(1.08);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.96);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.96);
+    }
+
+    /* Screen Transitions */
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4.5rem 1.25rem 3.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(24px) scale(0.96);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  visibility 0.65s;
+      z-index: 10;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .screen::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screen.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .screen.exit-up {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-28px) scale(1.03);
+    }
+
+    /* Staggered Bubble & Line Animations */
+    .chat-bubble {
+      opacity: 0;
+      transform: translateY(16px) scale(0.92);
+      transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .chat-bubble.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .sweet-line {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .sweet-line.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Waving Hand Keyframes */
+    .waving-hand {
+      display: inline-block;
+      transform-origin: 70% 70%;
+      animation: waveHand 1.9s ease-in-out infinite;
+      filter: drop-shadow(0 0 18px rgba(250, 204, 21, 0.45));
+    }
+
+    @keyframes waveHand {
+      0% { transform: rotate(0deg); }
+      15% { transform: rotate(18deg); }
+      30% { transform: rotate(-10deg); }
+      45% { transform: rotate(16deg); }
+      60% { transform: rotate(-6deg); }
+      75% { transform: rotate(12deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Equalizer Bars */
+    .eq-bar {
+      width: 3px;
+      height: 12px;
+      background: #f472b6;
+      border-radius: 999px;
+      transition: height 0.2s ease;
+    }
+
+    .playing .eq-bar:nth-child(1) { animation: eqBounce 0.75s ease-in-out infinite alternate; }
+    .playing .eq-bar:nth-child(2) { animation: eqBounce 0.55s ease-in-out infinite alternate 0.2s; }
+    .playing .eq-bar:nth-child(3) { animation: eqBounce 0.85s ease-in-out infinite alternate 0.1s; }
+    .playing .eq-bar:nth-child(4) { animation: eqBounce 0.65s ease-in-out infinite alternate 0.3s; }
+
+    @keyframes eqBounce {
+      0% { height: 4px; }
+      100% { height: 15px; }
+    }
+
+    /* Floating Butterflies & Hearts inside Cards */
+    .float-slow {
+      animation: gentleBob 3.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes gentleBob {
+      0% { transform: translateY(0px) rotate(-4deg); }
+      100% { transform: translateY(-8px) rotate(5deg); }
+    }
+
+    /* Toast Notification */
+    #toastBanner {
+      position: fixed;
+      bottom: 4.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 50;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #toastBanner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
+  <!-- Interactive Background Canvas (Stars, Butterflies, Smileys, Sparkles) -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Floating Top Controls (Music & Mute) -->
+  <header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3.5 sm:px-6 pointer-events-none">
+    <!-- Subtle Friendship Tag -->
+    <div class="glass-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 pointer-events-auto">
+      <span class="text-xs sm:text-sm font-semibold tracking-wide text-pink-200">✨ Palak's Corner</span>
+    </div>
+
+    <!-- Floating Audio Controls -->
+    <div id="audioControls" class="glass-pill px-2.5 py-1.5 rounded-full flex items-center gap-1.5 pointer-events-auto shadow-lg">
+      <!-- Equalizer Indicator -->
+      <div id="eqVisualizer" class="flex items-end gap-0.5 h-4 px-1.5" aria-hidden="true">
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+      </div>
+
+      <!-- Play / Pause Button -->
+      <button id="playPauseBtn" type="button" title="Play / Pause Music"
+        class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-pink-500/30 text-white transition active:scale-90">
+        <!-- Play Icon (shown when paused) -->
+        <svg id="iconPlay" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <!-- Pause Icon (shown when playing) -->
+        <svg id="iconPause" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+      </button>
+
+      <!-- Mute / Unmute Button -->
+      <button id="muteBtn" type="button" title="Mute / Unmute Music"
+        class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-purple-500/30 text-white transition active:scale-90">
+        <!-- Unmuted Icon -->
+        <svg id="iconVolumeOn" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+        <!-- Muted Icon -->
+        <svg id="iconVolumeOff" class="w-4 h-4 fill-current hidden text-pink-400" viewBox="0 0 24 24">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Interactive Container -->
+  <main class="relative w-full h-full z-10">
+
+    <!-- ==================== SCREEN 1: SURPRISE ==================== -->
+    <section id="screen-1" class="screen active" aria-label="Surprise Screen">
+      <div class="w-full max-w-md mx-auto text-center">
+        <div class="glass-card rounded-3xl p-7 sm:p-10 relative overflow-hidden">
+          <!-- Decorative Corner Butterflies -->
+          <span class="absolute top-4 left-5 text-2xl float-slow opacity-85">🦋</span>
+          <span class="absolute bottom-4 right-5 text-2xl float-slow opacity-85" style="animation-delay: 1.2s;">✨</span>
+
+          <!-- Top Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-200 text-xs font-bold tracking-widest uppercase mb-6">
+            <span>✨ Bestie Alert ✨</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight glow-title mb-4 leading-tight">
+            HEY PALAK! 👀
+          </h1>
+
+          <!-- Subheadline -->
+          <p class="text-lg sm:text-xl font-semibold text-purple-100/95 leading-relaxed mb-8 glow-soft">
+            RUK JAOOO... EK CHHOTI SI BAAT HAI 😂
+          </p>
+
+          <!-- Enter Button (Triggers Music + Screen 2) -->
+          <button id="enterBtn" type="button"
+            class="btn-primary w-full sm:w-auto px-8 py-4 rounded-2xl text-white font-extrabold text-base sm:text-lg tracking-wide inline-flex items-center justify-center gap-2.5 cursor-pointer">
+            <span>ACHA DIKHAO 👀</span>
+          </button>
+
+          <p class="mt-4 text-xs text-purple-200/60 font-medium">
+            (Sound on ho jayega, promise mast vibe hai 🎶)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2: FRIENDSHIP ==================== -->
+    <section id="screen-2" class="screen" aria-label="Friendship Banter Screen">
+      <div class="w-full max-w-lg mx-auto">
+        <div class="glass-card rounded-3xl p-5 sm:p-8 relative">
+          
+          <!-- Header -->
+          <div class="text-center mb-5">
+            <span class="inline-block px-3 py-1 rounded-full bg-purple-500/25 border border-purple-400/30 text-purple-200 text-xs font-semibold mb-2.5">
+              🚨 Breaking News 🚨
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold glow-title leading-snug">
+              Madam Offline Hone Ja Rahi Hain! 😂
+            </h2>
+          </div>
+
+          <!-- Highlighted Quote Banner -->
+          <div class="rounded-2xl p-4 mb-5 bg-gradient-to-r from-pink-500/20 via-purple-500/25 to-indigo-500/20 border border-pink-400/30 text-center shadow-inner">
+            <p class="text-sm sm:text-base font-bold text-pink-100 glow-soft">
+              "Internet band ho sakta hai, lekin dosti ka connection nahi! ❤️"
+            </p>
+          </div>
+
+          <!-- Funny Animated Messages Stack -->
+          <div id="funnyMessagesList" class="space-y-2.5 mb-6">
+            <div class="chat-bubble flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/8 border border-white/12">
+              <span class="text-xl shrink-0">😂</span>
+              <p class="text-sm sm:text-base font-semibold text-white/95">Itni jaldi kya hai jaane ki? 😂</p>
+            </div>
+
+            <div class="chat-bubble flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/8 border border-white/12">
+              <span class="text-xl shrink-0">🛑</span>
+              <p class="text-sm sm:text-base font-semibold text-white/95">Thoda aur ruk jao madam!</p>
+            </div>
+
+            <div class="chat-bubble flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/8 border border-white/12">
+              <span class="text-xl shrink-0">📲</span>
+              <p class="text-sm sm:text-base font-semibold text-white/95">Online aana toh yaad se!</p>
+            </div>
+
+            <div class="chat-bubble flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/8 border border-white/12">
+              <span class="text-xl shrink-0">💗</span>
+              <p class="text-sm sm:text-base font-semibold text-pink-200">Apna khayal rakhna, pagal! 💗</p>
+            </div>
+
+            <div class="chat-bubble flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/8 border border-white/12">
+              <span class="text-xl shrink-0">🥺</span>
+              <p class="text-sm sm:text-base font-semibold text-purple-200">Aur haan, mujhe bhool mat jaana!</p>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="flex items-center justify-between gap-3">
+            <button type="button" onclick="goToScreen(1)"
+              class="btn-secondary px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold text-purple-200 cursor-pointer">
+              ← Peeche
+            </button>
+            <button type="button" onclick="goToScreen(3)"
+              class="btn-primary flex-1 py-3.5 px-6 rounded-xl text-sm sm:text-base font-bold text-white cursor-pointer">
+              Ek Sweet Si Baat ✨ →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 3: SWEET MESSAGE ==================== -->
+    <section id="screen-3" class="screen" aria-label="Sweet Friendship Message Screen">
+      <div class="w-full max-w-lg mx-auto">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 text-center relative overflow-hidden">
+          
+          <!-- Floating Corner Accents -->
+          <span class="absolute top-5 right-6 text-2xl float-slow">🦋</span>
+          <span class="absolute bottom-5 left-6 text-2xl float-slow" style="animation-delay: 1s;">💫</span>
+
+          <!-- Radiant Header -->
+          <div class="mb-6">
+            <span class="text-xs uppercase tracking-[0.22em] text-pink-300/80 font-bold block mb-2">
+              For My Best Friend
+            </span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold glow-title glow-pink tracking-wide">
+              PALAK ❤️
+            </h2>
+          </div>
+
+          <!-- Line-by-Line Emotional Friendship Note -->
+          <div id="sweetMessageLines" class="space-y-4 text-base sm:text-lg font-medium leading-relaxed text-purple-50/95 mb-8 px-1">
+            <p class="sweet-line">
+              Chahe kitni bhi busy ho jao, hamesha khush rehna. ✨
+            </p>
+            <p class="sweet-line">
+              Apni smile kabhi mat khona. 😊
+            </p>
+            <p class="sweet-line">
+              Aur jab bhi mann kare, bina soche message kar dena. 💬
+            </p>
+            <p class="sweet-line text-lg sm:text-xl font-bold text-pink-200 glow-soft pt-1">
+              Dosti mein formalities nahi hoti! 🫶
+            </p>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="flex items-center justify-between gap-3">
+            <button type="button" onclick="goToScreen(2)"
+              class="btn-secondary px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold text-purple-200 cursor-pointer">
+              ← Back
+            </button>
+            <button type="button" onclick="goToScreen(4)"
+              class="btn-primary flex-1 py-3.5 px-6 rounded-xl text-sm sm:text-base font-bold text-white cursor-pointer">
+              Okay Last Screen 🥺 →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 4: GOODBYE ==================== -->
+    <section id="screen-4" class="screen" aria-label="Goodbye Bestie Screen">
+      <div class="w-full max-w-md mx-auto text-center">
+        <div class="glass-card rounded-3xl p-7 sm:p-10 relative overflow-hidden">
+          
+          <!-- Animated Waving Hand & Floating Hearts -->
+          <div class="relative inline-flex items-center justify-center mb-4">
+            <span class="text-6xl sm:text-7xl waving-hand select-none" role="img" aria-label="Waving hand">👋</span>
+            <span class="absolute -top-2 -right-5 text-2xl float-slow">💗</span>
+            <span class="absolute -bottom-1 -left-5 text-xl float-slow" style="animation-delay: 0.8s;">💜</span>
+          </div>
+
+          <!-- Goodbye Headline -->
+          <h2 class="text-3xl sm:text-4xl font-extrabold glow-title mb-4">
+            OKAY BYE PALAK! 🥺
+          </h2>
+
+          <!-- Funny Attendance Reminder -->
+          <div class="rounded-2xl bg-white/7 border border-white/12 p-4 mb-5">
+            <p class="text-base sm:text-lg font-semibold text-purple-100 leading-relaxed">
+              Jaldi wapas aana...<br/>
+              <span class="text-pink-300 font-bold">Warna tumhari attendance lagani padegi! 😂</span>
+            </p>
+          </div>
+
+          <!-- Bestie Sign-off -->
+          <p class="text-xl sm:text-2xl font-e
